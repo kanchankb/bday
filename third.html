@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Amar · Age Reveal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000;
+            font-family: 'Inter', sans-serif;
+            padding: 1.5rem;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            background: #0a0a0a;
+            border-radius: 2.8rem;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,215,150,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ----- CURTAIN STAGE (elegant fabric) ----- */
+        .curtain-stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            z-index: 10;
+            pointer-events: none;
+            perspective: 1200px;
+        }
+
+        .curtain-panel {
+            flex: 1;
+            position: relative;
+            background: #1a1a1a;
+            background-image: 
+                repeating-linear-gradient(45deg, 
+                    rgba(40, 40, 40, 0.3) 0px, 
+                    rgba(40, 40, 40, 0.3) 3px,
+                    rgba(30, 30, 30, 0.5) 3px,
+                    rgba(30, 30, 30, 0.5) 6px),
+                radial-gradient(ellipse at 30% 40%, #2a2a2a, #0d0d0d);
+            transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+            transform: scaleX(1);
+            transform-origin: center;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.7), 0 0 15px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .curtain-panel:first-child {
+            transform-origin: left;
+            border-right: 2px solid rgba(210, 180, 140, 0.08);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .curtain-panel:last-child {
+            transform-origin: right;
+            border-left: 2px solid rgba(210, 180, 140, 0.08);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .curtain-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, 
+                rgba(0,0,0,0.1) 0px, 
+                rgba(255,215,150,0.01) 6px,
+                rgba(0,0,0,0.08) 12px,
+                rgba(255,215,150,0.005) 18px,
+                rgba(0,0,0,0.12) 24px);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .curtain-panel::after {
+            content: "✦ ✦ ✦";
+            position: absolute;
+            bottom: 12%;
+            font-size: 1.2rem;
+            letter-spacing: 14px;
+            color: #c9b294;
+            opacity: 0.15;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+            font-weight: 300;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .curtain-panel:first-child::before {
+            background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, transparent 40%);
+            mix-blend-mode: multiply;
+        }
+
+        .curtain-panel:last-child::before {
+            background: linear-gradient(270deg, rgba(0,0,0,0.3) 0%, transparent 40%);
+            mix-blend-mode: multiply;
+        }
+
+        .curtain-stage.open .curtain-panel:first-child {
+            transform: scaleX(0) rotateY(2deg);
+            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .curtain-stage.open .curtain-panel:last-child {
+            transform: scaleX(0) rotateY(-2deg);
+            transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* ----- MAIN CONTENT (black background) ----- */
+        .content {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        /* Animated gradient background overlay */
+        .content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(210, 180, 140, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(210, 180, 140, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(210, 180, 140, 0.03) 0%, transparent 40%);
+            animation: bgPulse 6s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Floating animated particles */
+        .particle-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(210, 180, 140, 0.3);
+            border-radius: 50%;
+            animation: floatParticle 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 7s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1.2s; animation-duration: 9s; width: 6px; height: 6px; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2.5s; animation-duration: 8s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 0.8s; animation-duration: 10s; width: 5px; height: 5px; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3.2s; animation-duration: 7.5s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 1.8s; animation-duration: 8.5s; width: 7px; height: 7px; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 4s; animation-duration: 9.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 0.5s; animation-duration: 7.2s; width: 5px; height: 5px; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 2.2s; animation-duration: 8.8s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3.8s; animation-duration: 6.5s; width: 8px; height: 8px; }
+        .particle:nth-child(11) { left: 45%; animation-delay: 1s; animation-duration: 11s; }
+        .particle:nth-child(12) { left: 75%; animation-delay: 2.8s; animation-duration: 7.8s; width: 6px; height: 6px; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1) rotate(720deg); opacity: 0; }
+        }
+
+        .greeting-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        /* ----- LARGE HAPPY BIRTHDAY AMAR AT TOP ----- */
+        .main-heading {
+            position: absolute;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #fae3c0 0%, #f5d4a8 30%, #eacba1 60%, #fae3c0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 0 40px rgba(210, 180, 140, 0.15));
+            animation: headingGlow 3s ease-in-out infinite;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        @keyframes headingGlow {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(210, 180, 140, 0.1)); }
+            50% { filter: drop-shadow(0 0 60px rgba(210, 180, 140, 0.25)); }
+        }
+
+        .happy-bday {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #f2e9de;
+            text-shadow: 0 8px 24px rgba(0,0,0,0.7);
+            line-height: 1.1;
+            margin-bottom: 0.1rem;
+            animation: fadeInUp 1.2s ease forwards;
+            opacity: 0;
+            /* Hidden - main heading takes its place */
+            display: none;
+        }
+
+        .line-deco {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4b68a, #f5d4a8, #d4b68a, transparent);
+            margin: 0.2rem 0 0.3rem;
+            opacity: 0.6;
+            border-radius: 2px;
+            animation: expandLine 1.5s ease forwards;
+        }
+
+        @keyframes expandLine {
+            0% { width: 0; opacity: 0; }
+            100% { width: 120px; opacity: 0.6; }
+        }
+
+        /* ----- AGE DISPLAY ----- */
+        .age-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0.1rem 0;
+            padding: 0.5rem 2.5rem;
+            background: rgba(255, 215, 150, 0.03);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 215, 150, 0.06);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1.4s ease forwards;
+            margin-top: 1.5rem;
+        }
+
+        .age-number {
+            font-size: clamp(5.5rem, 19vw, 11rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #fae3c0 0%, #f5d4a8 30%, #eacba1 60%, #fae3c0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            position: relative;
+            animation: ageGlow 3s ease-in-out infinite, countUp 1.5s ease forwards;
+            filter: drop-shadow(0 0 30px rgba(210, 180, 140, 0.15));
+        }
+
+        @keyframes countUp {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes ageGlow {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(210, 180, 140, 0.15)); }
+            50% { filter: drop-shadow(0 0 60px rgba(210, 180, 140, 0.3)); }
+        }
+
+        .age-container::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 2.5rem;
+            padding: 2px;
+            background: conic-gradient(from 0deg, transparent, rgba(210, 180, 140, 0.1), rgba(210, 180, 140, 0.25), transparent, rgba(210, 180, 140, 0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: spinGlow 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spinGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .age-label {
+            font-size: clamp(1rem, 2.2vw, 1.6rem);
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: rgba(255, 235, 210, 0.5);
+            margin-top: -0.1rem;
+        }
+
+        /* ----- QUOTE SECTION (with 2 quotes) ----- */
+        .quote-container {
+            margin-top: 0.6rem;
+            padding: 0.5rem 1.5rem;
+            position: relative;
+            animation: fadeInUp 1.8s ease forwards;
+            min-height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quote-text {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 300;
+            color: rgba(255, 235, 210, 0.6);
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+            font-style: italic;
+            position: relative;
+            padding: 0 1.5rem;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            text-align: center;
+        }
+
+        .quote-text::before {
+            content: '"';
+            font-size: 2.5rem;
+            color: rgba(210, 180, 140, 0.15);
+            position: absolute;
+            left: -0.5rem;
+            top: -0.8rem;
+            font-style: normal;
+        }
+
+        .quote-text::after {
+            content: '"';
+            font-size: 2.5rem;
+            color: rgba(210, 180, 140, 0.15);
+            position: absolute;
+            right: -0.5rem;
+            bottom: -0.8rem;
+            font-style: normal;
+        }
+
+        .quote-text.fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .quote-text.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-dots {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .quote-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 215, 150, 0.15);
+            border: 1px solid rgba(255, 215, 150, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 2s ease forwards;
+        }
+
+        .quote-dot.active {
+            background: rgba(210, 180, 140, 0.4);
+            border-color: rgba(210, 180, 140, 0.2);
+            box-shadow: 0 0 15px rgba(210, 180, 140, 0.15);
+            transform: scale(1.2);
+        }
+
+        .quote-dot:hover {
+            background: rgba(210, 180, 140, 0.25);
+            transform: scale(1.1);
+        }
+
+        .age-sub {
+            font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+            color: rgba(255, 235, 210, 0.15);
+            letter-spacing: 0.4em;
+            margin-top: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: fadeInUp 2s ease forwards;
+        }
+
+        .age-sub .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 215, 150, 0.2);
+            display: inline-block;
+        }
+
+        /* Sparkle dots */
+        .sparkle-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+            animation: fadeInUp 2.2s ease forwards;
+        }
+
+        .sparkle-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 215, 150, 0.12);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        .sparkle-dots span:nth-child(2) { animation-delay: 0.3s; }
+        .sparkle-dots span:nth-child(3) { animation-delay: 0.6s; }
+        .sparkle-dots span:nth-child(4) { animation-delay: 0.9s; }
+        .sparkle-dots span:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.12; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.5); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ----- TOGGLE BUTTON ----- */
+        .toggle-btn {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 20;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 150, 0.08);
+            color: #e6d9c8;
+            padding: 0.7rem 1.6rem;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: auto;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(40, 40, 40, 0.9);
+            border-color: rgba(255, 215, 150, 0.2);
+            color: #f5ede3;
+            transform: scale(1.02);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+        }
+
+        .toggle-btn:active {
+            transform: scale(0.96);
+        }
+
+        .toggle-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .credit {
+            position: absolute;
+            bottom: 1.4rem;
+            left: 2rem;
+            z-index: 15;
+            font-size: 0.6rem;
+            color: rgba(255, 215, 150, 0.08);
+            letter-spacing: 0.25em;
+            font-weight: 300;
+            pointer-events: none;
+        }
+
+        /* responsive */
+        @media (max-width: 600px) {
+            .card { border-radius: 1.8rem; }
+            .toggle-btn {
+                bottom: 1.2rem;
+                right: 1.2rem;
+                padding: 0.5rem 1.2rem;
+                font-size: 0.7rem;
+            }
+            .curtain-panel::after {
+                font-size: 0.9rem;
+                letter-spacing: 10px;
+                bottom: 10%;
+            }
+            .age-container {
+                padding: 0.3rem 1.2rem;
+                margin-top: 1rem;
+            }
+            .age-container::before {
+                inset: -4px;
+            }
+            .quote-text {
+                padding: 0 0.8rem;
+                font-size: 0.9rem;
+            }
+            .quote-text::before,
+            .quote-text::after {
+                font-size: 1.5rem;
+            }
+            .quote-text::before { left: -0.2rem; top: -0.5rem; }
+            .quote-text::after { right: -0.2rem; bottom: -0.5rem; }
+            .quote-dots {
+                gap: 0.4rem;
+            }
+            .quote-dot {
+                width: 6px;
+                height: 6px;
+            }
+            .main-heading {
+                top: 0.8rem;
+                font-size: clamp(1.8rem, 6vw, 3rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" role="main" aria-label="Birthday age reveal for Amar">
+        <!-- Curtain stage -->
+        <div class="curtain-stage" id="curtainStage">
+            <div class="curtain-panel" aria-hidden="true"></div>
+            <div class="curtain-panel" aria-hidden="true"></div>
+        </div>
+
+        <!-- Main content with black background -->
+        <div class="content">
+            <!-- Floating particles -->
+            <div class="particle-container">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+
+            <!-- LARGE MAIN HEADING AT TOP -->
+            <div class="main-heading">Happy Birthday Amar</div>
+
+            <div class="greeting-wrapper">
+                <!-- Hidden - main heading replaces this -->
+                <div class="happy-bday" style="display:none;"><span>Happy</span> <span>Birthday</span></div>
+                <div class="line-deco"></div>
+                
+                <!-- Age Display -->
+                <div class="age-container">
+                    <div class="age-number" id="ageDisplay">28</div>
+                    <div class="age-label">Years Young</div>
+                </div>
+                
+                <!-- Quote Section with 2 quotes -->
+                <div class="quote-container">
+                    <div class="quote-text" id="quoteText">
+                        The best is yet to come, keep shining bright
+                    </div>
+                    <div class="quote-dots" id="quoteDots">
+                        <span class="quote-dot active" data-index="0"></span>
+                        <span class="quote-dot" data-index="1"></span>
+                    </div>
+                </div>
+
+                <div class="age-sub">
+                    <span>✦</span>
+                    <span>celebrating today</span>
+                    <span>✦</span>
+                </div>
+
+                <div class="sparkle-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toggle button -->
+        <button class="toggle-btn" id="toggleCurtainBtn" aria-label="Toggle curtains">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+            <span id="btnLabel">Open</span>
+        </button>
+
+        <div class="credit">✦  AMAR  ✦</div>
+    </div>
+
+    <script>
+        (function() {
+            const curtainStage = document.getElementById('curtainStage');
+            const toggleBtn = document.getElementById('toggleCurtainBtn');
+            const btnLabel = document.getElementById('btnLabel');
+            const ageDisplay = document.getElementById('ageDisplay');
+            const quoteText = document.getElementById('quoteText');
+            const quoteDots = document.querySelectorAll('.quote-dot');
+
+            // ----- CALCULATE AGE -----
+            function calculateAge(birthDate) {
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age;
+            }
+
+            const birthDate = new Date(1997, 6, 12);
+            const age = calculateAge(birthDate);
+            ageDisplay.textContent = age;
+
+            // ----- ONLY 2 QUOTES (3 & 5 from original) -----
+            const quotes = [
+                "The best is yet to come, keep shining bright",
+                "Celebrate yourself today, you deserve it all"
+            ];
+
+            let currentQuoteIndex = 0;
+            let quoteInterval;
+
+            function changeQuote(index) {
+                quoteDots.forEach(dot => dot.classList.remove('active'));
+                
+                if (index >= 0 && index < quoteDots.length) {
+                    quoteDots[index].classList.add('active');
+                }
+
+                quoteText.classList.add('fade-out');
+                quoteText.classList.remove('fade-in');
+
+                setTimeout(() => {
+                    if (index >= 0 && index < quotes.length) {
+                        quoteText.textContent = quotes[index];
+                    }
+                    quoteText.classList.remove('fade-out');
+                    quoteText.classList.add('fade-in');
+                }, 400);
+            }
+
+            function nextQuote() {
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                changeQuote(currentQuoteIndex);
+            }
+
+            quoteDots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    clearInterval(quoteInterval);
+                    currentQuoteIndex = index;
+                    changeQuote(index);
+                    quoteInterval = setInterval(nextQuote, 4000);
+                });
+            });
+
+            quoteInterval = setInterval(nextQuote, 4000);
+
+            // ----- CURTAIN LOGIC -----
+            let isOpen = false;
+
+            function openCurtains() {
+                if (!isOpen) {
+                    curtainStage.classList.add('open');
+                    isOpen = true;
+                    btnLabel.textContent = 'Close';
+                }
+            }
+
+            function closeCurtains() {
+                if (isOpen) {
+                    curtainStage.classList.remove('open');
+                    isOpen = false;
+                    btnLabel.textContent = 'Open';
+                }
+            }
+
+            window.addEventListener('load', function() {
+                setTimeout(openCurtains, 500);
+            });
+
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isOpen) {
+                    closeCurtains();
+                } else {
+                    openCurtains();
+                }
+            });
+
+            window.addEventListener('beforeunload', function() {
+                clearInterval(quoteInterval);
+            });
+        })();
+    </script>
+</body>
+</html>

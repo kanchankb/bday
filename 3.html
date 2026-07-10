@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 Lottie Music Box | Premium Black Theme</title>
+
+<!-- Lottie Player CDN -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #ec4899;
+    --accent: #10b981;
+    --dark-bg: #050505;
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(99, 102, 241, 0.2);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --gradient-2: linear-gradient(135deg, #ec4899, #f97316);
+    --gradient-3: linear-gradient(135deg, #10b981, #0ea5e9);
+    --glow-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    
+    /* Responsive variables */
+    --container-padding: clamp(1rem, 5vw, 2rem);
+    --box-padding: clamp(1.5rem, 4vw, 2rem);
+    --heading-size: clamp(2rem, 8vw, 3.5rem);
+    --subheading-size: clamp(0.9rem, 3vw, 1.2rem);
+    --label-size: clamp(0.85rem, 2.5vw, 1rem);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--container-padding);
+    position: relative;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Animated background with particles */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 30%);
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent);
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-1000px) translateX(500px); }
+}
+
+/* Main container */
+.main-container {
+    width: 100%;
+    max-width: min(1400px, 95vw);
+    margin: 0 auto;
+    padding: var(--container-padding);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 8vw, 4rem);
+    position: relative;
+}
+
+.header h1 {
+    font-size: var(--heading-size);
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: clamp(0.75rem, 3vw, 1.5rem);
+    letter-spacing: clamp(0.5px, 1vw, 1px);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: inline-block;
+    line-height: 1.2;
+}
+
+.header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(120px, 40vw, 200px);
+    height: 4px;
+    background: var(--gradient-1);
+    border-radius: 2px;
+}
+
+.header p {
+    font-size: var(--subheading-size);
+    color: var(--text-secondary);
+    max-width: min(700px, 90vw);
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+    padding: 0 var(--container-padding);
+}
+
+/* Music boxes grid - Updated for larger Lottie animations */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+    gap: clamp(1.25rem, 4vw, 2rem);
+    margin-bottom: clamp(2rem, 6vw, 4rem);
+    width: 100%;
+}
+
+.box {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: clamp(16px, 4vw, 24px);
+    padding: var(--box-padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height: auto;
+    min-height: clamp(320px, 70vw, 380px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s;
+}
+
+.box:hover::before {
+    opacity: 0.1;
+}
+
+.box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.7s;
+    z-index: -1;
+}
+
+.box:hover::after {
+    left: 100%;
+}
+
+.box:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        var(--glow-shadow);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.box-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    gap: clamp(0.75rem, 3vw, 1rem);
+}
+
+/* Lottie Container - SIGNIFICANTLY LARGER */
+.lottie-container {
+    width: clamp(180px, 40vw, 220px); /* Increased from 140px */
+    height: clamp(180px, 40vw, 220px); /* Increased from 140px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    border-radius: clamp(16px, 4vw, 24px);
+    background: rgba(0, 0, 0, 0.3);
+    padding: clamp(0.75rem, 2vw, 1rem);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.lottie-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.15));
+    z-index: -1;
+}
+
+/* Lottie player specific styling for larger animations */
+lottie-player {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1.1);
+}
+
+.label {
+    font-weight: 600;
+    font-size: var(--label-size);
+    line-height: 1.5;
+    color: var(--text-primary);
+    padding: 0 clamp(0.25rem, 1vw, 0.5rem);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.box-icon {
+    font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+    margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+    opacity: 0.8;
+}
+
+.secret-badge {
+    position: absolute;
+    top: clamp(0.75rem, 2vw, 1.25rem);
+    right: clamp(0.75rem, 2vw, 1.25rem);
+    background: var(--gradient-1);
+    color: white;
+    font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+    padding: clamp(0.25rem, 1vw, 0.375rem) clamp(0.5rem, 2vw, 0.875rem);
+    border-radius: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: inherit;
+    z-index: 3;
+}
+
+.box:hover .play-overlay {
+    opacity: 1;
+}
+
+.play-button {
+    width: clamp(45px, 12vw, 60px);
+    height: clamp(45px, 12vw, 60px);
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transform: scale(0.8);
+    transition: transform 0.3s;
+}
+
+.box:hover .play-button {
+    transform: scale(1);
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    padding: var(--container-padding);
+}
+
+.popup-box {
+    background: rgba(10, 15, 30, 0.95);
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+    border-radius: clamp(16px, 4vw, 24px);
+    text-align: center;
+    width: 100%;
+    max-width: min(450px, 95vw);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.popup-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--gradient-1);
+}
+
+.popup-box h3 {
+    margin-bottom: clamp(1.25rem, 4vw, 2rem);
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.code-input-container {
+    position: relative;
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.code-input-container i {
+    position: absolute;
+    left: clamp(0.75rem, 3vw, 1.25rem);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: clamp(1rem, 3vw, 1.25rem);
+}
+
+.popup-box input {
+    width: 100%;
+    padding: clamp(0.875rem, 3vw, 1.125rem) clamp(0.75rem, 3vw, 1.25rem) clamp(0.875rem, 3vw, 1.125rem) clamp(2.5rem, 8vw, 3.5rem);
+    background: rgba(20, 25, 45, 0.8);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: clamp(10px, 3vw, 14px);
+    color: white;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.popup-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.popup-box input::placeholder {
+    color: #94a3b8;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+}
+
+.popup-box button {
+    background: var(--gradient-1);
+    color: white;
+    border: none;
+    padding: clamp(0.875rem, 3vw, 1.125rem) clamp(1.5rem, 5vw, 2.5rem);
+    border-radius: clamp(10px, 3vw, 14px);
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.popup-box button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+}
+
+/* Player */
+.player {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 10, 0.98);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1001;
+    padding: var(--container-padding);
+    backdrop-filter: blur(15px);
+}
+
+.player-content {
+    width: 100%;
+    max-width: min(1000px, 95vw);
+    background: rgba(15, 20, 40, 0.9);
+    border-radius: clamp(16px, 4vw, 24px);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.7),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+.player-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--gradient-1);
+}
+
+.player h2 {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--text-primary);
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: clamp(0.75rem, 2vw, 1rem);
+    line-height: 1.3;
+    width: 100%;
+    word-break: break-word;
+}
+
+.player h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(60px, 20vw, 100px);
+    height: 3px;
+    background: var(--gradient-1);
+    border-radius: 2px;
+}
+
+.player video, .player audio {
+    width: 100%;
+    border-radius: clamp(10px, 3vw, 16px);
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    outline: none;
+}
+
+.player video {
+    max-height: min(400px, 50vh);
+    background-color: #000;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.player audio {
+    height: clamp(40px, 8vw, 60px);
+}
+
+.player-controls {
+    display: flex;
+    gap: clamp(0.75rem, 3vw, 1.25rem);
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.player button {
+    background: var(--gradient-1);
+    color: white;
+    border: none;
+    padding: clamp(0.875rem, 3vw, 1.125rem) clamp(1.5rem, 5vw, 2.5rem);
+    border-radius: clamp(10px, 3vw, 14px);
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: fit-content;
+}
+
+.player button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+}
+
+.player button.close-btn {
+    background: var(--gradient-2);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--text-secondary);
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+.footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.footer i {
+    color: var(--secondary);
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .box:hover {
+        transform: none;
+    }
+    
+    .play-overlay {
+        opacity: 0.5;
+    }
+    
+    .box:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    
+    .box {
+        min-height: 300px;
+    }
+    
+    .lottie-container {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .lottie-container {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .box {
+        min-height: 280px;
+        padding: 1rem;
+    }
+    
+    .lottie-container {
+        width: 240px;
+        height: 240px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .label {
+        font-size: 0.8rem;
+    }
+    
+    .footer {
+        margin-top: 1rem;
+        padding: 0.75rem;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+    .lottie-container {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .box {
+        min-height: 400px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .bg-animation, .particles, .play-overlay, .secret-badge,
+    .popup, .player, .footer i {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .box {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Background elements -->
+<div class="bg-animation"></div>
+<div class="particles" id="particles"></div>
+
+<div class="main-container">
+    <div class="header">
+        <h1>LOTTIE MUSIC BOX</h1>
+        <p>Each animated box holds a special musical memory. Click to reveal the emotions within.</p>
+    </div>
+
+    <div class="container">
+        <!-- Box 1: Secret -->
+        <div class="box" onclick="openPopup()">
+            <div class="secret-badge">
+                <i class="fas fa-lock"></i>
+                Secret
+            </div>
+            <div class="box-content">
+                <div class="box-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div class="lottie-container">
+                    <lottie-player src="Couple Bear Valentine.json" background="transparent" speed="1" style="width:100%;height:100%" loop autoplay></lottie-player>
+                </div>
+                <div class="label">Special Secret Message</div>
+            </div>
+            <div class="play-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="box" onclick="playSong(2)">
+            <div class="box-content">
+                <div class="box-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="lottie-container">
+                    <lottie-player src="Married couple on a date.json" background="transparent" speed="1" style="width:100%;height:100%" loop autoplay></lottie-player>
+                </div>
+                <div class="label">"When he asks me how much I love him."</div>
+            </div>
+            <div class="play-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="box" onclick="playSong(3)">
+            <div class="box-content">
+                <div class="box-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="lottie-container">
+                    <lottie-player src="singthesong.json" background="transparent" speed="1" style="width:100%;height:100%" loop autoplay></lottie-player>
+                </div>
+                <div class="label">"That song touches his soul."</div>
+            </div>
+            <div class="play-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="box" onclick="playSong(4)">
+            <div class="box-content">
+                <div class="box-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="lottie-container">
+                    <lottie-player src="Love.json" background="transparent" speed="1" style="width:100%;height:100%" loop autoplay></lottie-player>
+                </div>
+                <div class="label">"When he makes me wait, with my eyes searching only for him."</div>
+            </div>
+            <div class="play-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="box" onclick="playSong(5)">
+            <div class="box-content">
+                <div class="box-icon">
+                    <i class="fas fa-flower"></i>
+                </div>
+                <div class="lottie-container">
+                    <lottie-player src="Couple on the Garden with Heart and Flower Celebration with confetti.json" background="transparent" speed="1" style="width:100%;height:100%" loop autoplay></lottie-player>
+                </div>
+                <div class="label">"In a garden full of flowers, you're the only one whose fragrance stayed with my heart."</div>
+            </div>
+            <div class="play-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><i class="fas fa-heart"></i> Created with love | Each memory has its own melody <i class="fas fa-music"></i></p>
+    </div>
+</div>
+
+<!-- Secret Popup -->
+<div class="popup" id="popup">
+    <div class="popup-box">
+        <h3>Enter Secret Code</h3>
+        <div class="code-input-container">
+            <i class="fas fa-key"></i>
+            <input type="text" id="code" placeholder="Type the secret code...">
+        </div>
+        <button onclick="checkCode()">
+            <i class="fas fa-unlock-alt"></i> Unlock Secret
+        </button>
+    </div>
+</div>
+
+<!-- Media Player -->
+<div class="player" id="player">
+    <div class="player-content">
+        <h2 id="title">Song Title</h2>
+        <video id="video" controls style="display:none;"></video>
+        <audio id="audio" controls style="display:none;"></audio>
+        <div class="player-controls">
+            <button onclick="closePlayer()" class="close-btn">
+                <i class="fas fa-times"></i> Close Player
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Create floating particles (optimized for mobile)
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 15 : 30;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * (isMobile ? 50 : 100) + 20;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const duration = Math.random() * 30 + 20;
+        const delay = Math.random() * 10;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.opacity = Math.random() * 0.3 + 0.1;
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Songs data
+const songs = {
+    1: { title: " ", url: "secret.mp4" },
+    2: { title: "", url: "Video-369.mp4" },
+    3: { title: "", url: "Video-917.mp4" },
+    4: { title: "", url: "penguvin.mp4" },
+    5: { title: "", url: "flower.mp4" },
+    6: { title: "", url: "song6.mp3" }
+};
+
+// Function to open secret popup
+function openPopup() {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("code").focus();
+}
+
+// Function to check secret code
+function checkCode() {
+    let val = document.getElementById("code").value;
+    if (val === "21") {
+        // Animate success
+        const popup = document.querySelector('.popup-box');
+        popup.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            popup.style.transform = 'scale(1)';
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("code").value = "";
+            play(1);
+        }, 300);
+    } else {
+        // Animate error
+        const input = document.getElementById("code");
+        input.style.borderColor = '#ef4444';
+        input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.2)';
+        
+        setTimeout(() => {
+            input.style.borderColor = '';
+            input.style.boxShadow = '';
+        }, 1000);
+        
+        // Shake animation
+        input.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            input.style.animation = '';
+        }, 500);
+    }
+}
+
+// Function to play song from box click
+function playSong(num) {
+    // Add click effect for touch devices
+    const box = event.currentTarget;
+    box.style.transform = 'scale(0.98)';
+    setTimeout(() => {
+        box.style.transform = '';
+        play(num);
+    }, 200);
+}
+
+// Main play function
+function play(num) {
+    let video = document.getElementById("video");
+    let audio = document.getElementById("audio");
+    let title = document.getElementById("title");
+
+    let file = songs[num].url;
+    title.innerText = songs[num].title || "Music Player";
+
+    video.style.display = "none";
+    audio.style.display = "none";
+    video.pause();
+    audio.pause();
+
+    if (file.endsWith(".mp4")) {
+        video.src = file;
+        video.style.display = "block";
+        video.play().catch(e => console.log("Video play failed:", e));
+    } else {
+        audio.src = file;
+        audio.style.display = "block";
+        audio.play().catch(e => console.log("Audio play failed:", e));
+    }
+
+    document.getElementById("player").style.display = "flex";
+}
+
+// Function to close player
+function closePlayer() {
+    document.getElementById("video").pause();
+    document.getElementById("audio").pause();
+    
+    // Fade out animation
+    const player = document.getElementById("player");
+    player.style.opacity = '0';
+    setTimeout(() => {
+        player.style.display = 'none';
+        player.style.opacity = '1';
+    }, 300);
+}
+
+// Close popup if clicked outside
+document.getElementById('popup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.style.display = 'none';
+        document.getElementById("code").value = "";
+    }
+});
+
+// Close player if clicked outside
+document.getElementById('player').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closePlayer();
+    }
+});
+
+// Allow pressing Enter in the code input
+document.getElementById("code").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        checkCode();
+    }
+});
+
+// Add CSS for shake animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+`;
+document.head.appendChild(style);
+
+// Initialize particles on load
+window.addEventListener('load', createParticles);
+
+// Reinitialize particles on resize (with debounce)
+let resizeTimeout;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+        const particlesContainer = document.getElementById('particles');
+        particlesContainer.innerHTML = '';
+        createParticles();
+    }, 250);
+});
+
+// Handle orientation change
+window.addEventListener('orientationchange', function() {
+    setTimeout(function() {
+        const particlesContainer = document.getElementById('particles');
+        particlesContainer.innerHTML = '';
+        createParticles();
+    }, 500);
+});
+</script>
+
+</body>
+</html>

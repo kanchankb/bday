@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<title>Cinematic Slider Experience</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:#020617;
+    overflow:hidden;
+}
+
+/* Popup Overlay */
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at center,#0f172a,#020617);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+}
+
+.popup-box{
+    text-align:center;
+    color:white;
+    animation:fadeIn 1s ease;
+}
+
+.popup-box h1{
+    font-size:3rem;
+    letter-spacing:3px;
+    margin-bottom:20px;
+}
+
+.popup-box p{
+    opacity:.7;
+    margin-bottom:40px;
+}
+
+.open-btn{
+    padding:15px 50px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 30px rgba(37,99,235,.6);
+    transition:.3s;
+}
+
+.open-btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 50px rgba(37,99,235,.9);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(.9);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* Main Slider */
+.slider-container{
+    width:100%;
+    height:100vh;
+    display:flex;
+}
+
+/* Left Image */
+.slider-image{
+    width:50%;
+    position:relative;
+    overflow:hidden;
+}
+
+.slider-image img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transform:scale(1.05);
+    transition:1.2s ease;
+}
+
+.slider-image img.active{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* Right Text */
+.slider-text{
+    width:50%;
+    padding:100px;
+    background:linear-gradient(135deg,#020617,#0f172a);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.slider-text h1{
+    font-size:3.2rem;
+    margin-bottom:20px;
+}
+
+.slider-text p{
+    font-size:1.3rem;
+    line-height:1.8;
+    opacity:.9;
+    max-width:520px;
+}
+
+/* Text Animation */
+.fade{
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .slider-container{
+        flex-direction:column;
+    }
+    .slider-image,.slider-text{
+        width:100%;
+        height:50%;
+    }
+    .slider-text{
+        padding:40px;
+    }
+    .slider-text h1{
+        font-size:2.2rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Popup -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-box">
+        <h1>WELCOME</h1>
+        <p>Tap to enter your story</p>
+        <button class="open-btn" onclick="startExperience()">OPEN</button>
+    </div>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="slider-container">
+
+    <div class="slider-image">
+        <img src="one.png" class="active">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+    </div>
+
+    <div class="slider-text fade">
+        <h1 id="title"></h1>
+        <p id="desc"></p>
+    </div>
+
+</div>
+
+<script>
+const images = document.querySelectorAll(".slider-image img");
+const title = document.getElementById("title");
+const desc = document.getElementById("desc");
+const textBox = document.querySelector(".slider-text");
+const music = document.getElementById("bgMusic");
+const popup = document.getElementById("popup");
+
+const content = [
+    {
+        title:"Modern Design",
+        desc:"प्रिय लिखकर नीचे लिख दूँ नाम तुम्हारा, कुछ जगह बीच में छोड़ नीचे लिख दूँ सदा तुम्हारा। लिखा बीच में क्या, ये तुमको पढ़ना है, काग़ज़ पर मन की भाषा का अर्थ समझना है।"
+    },
+    {
+        title:"Responsive Layout",
+        desc:"हा layout पूर्णपणे responsive आहे. Mobile, tablet आणि desktop सर्व devices वर smooth आणि professional दिसतो."
+    },
+    {
+        
+        title:"Smooth Transitions",
+        desc:"प्रत्येक 5 सेकंदांनी image आणि text smoothly change होतात. Soft animations मुळे website ला premium feel मिळतो."
+    }
+];
+
+let index = 0;
+
+/* Start Experience */
+function startExperience(){
+    popup.style.display="none";
+    music.play();
+}
+
+/* Slider */
+setInterval(()=>{
+    images[index].classList.remove("active");
+    index = (index+1) % images.length;
+    images[index].classList.add("active");
+
+    title.textContent = content[index].title;
+    desc.textContent = content[index].desc;
+
+    textBox.classList.remove("fade");
+    void textBox.offsetWidth;
+    textBox.classList.add("fade");
+},5000);
+</script>
+
+</body>
+</html>

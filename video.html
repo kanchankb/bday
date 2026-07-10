@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>attractive · white text · for you</title>
+  <!-- modern clean fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000000;  /* pure black background */
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;  /* allow scrolling on small devices */
+    }
+
+    /* subtle animated gradient overlay (very soft) */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(220, 40, 80, 0.2) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, rgba(200, 30, 70, 0.15) 0%, transparent 45%);
+      z-index: 1;
+      pointer-events: none;
+      animation: softBreath 7s infinite alternate;
+    }
+
+    @keyframes softBreath {
+      0% { opacity: 0.4; filter: blur(5px); }
+      100% { opacity: 0.9; filter: blur(12px); }
+    }
+
+    /* main card – minimal, elegant, focus on white text */
+    .elegant-card {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      max-width: 900px;
+      background: rgba(10, 5, 5, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 70, 110, 0.6);
+      border-radius: clamp(40px, 8vw, 70px);
+      padding: clamp(1.8rem, 5vw, 3.8rem) clamp(1.5rem, 4vw, 3rem);
+      box-shadow: 0 30px 70px -20px #ff2f5f,
+                  0 0 0 2px rgba(255, 100, 130, 0.3) inset,
+                  0 0 50px #ff2f5f40;
+      text-align: center;
+      transition: all 0.3s;
+      margin: 1.5rem auto;
+    }
+
+    /* subtle red border glow */
+    .elegant-card:hover {
+      box-shadow: 0 35px 80px -15px #ff3f6f, 0 0 0 3px rgba(255, 120, 150, 0.4) inset;
+      border-color: rgba(255, 90, 120, 0.8);
+    }
+
+    /* tiny hearts separator – minimal */
+    .heart-sep {
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      letter-spacing: clamp(6px, 2vw, 12px);
+      color: #ff4d6d;
+      text-shadow: 0 0 18px #ff4d6d;
+      margin-bottom: clamp(0.8rem, 2vh, 1.2rem);
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+
+    /* main poem text – pure white, crisp, elegant */
+    .poem-white {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 4vw, 2.1rem);
+      font-weight: 400;
+      line-height: 1.7;
+      color: #ffffff;           /* pure white */
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4),
+                   0 0 30px rgba(255, 80, 120, 0.3);
+      margin: clamp(1rem, 3vh, 1.8rem) 0 clamp(1.2rem, 3vh, 2rem);
+      letter-spacing: 0.3px;
+      word-break: break-word;
+    }
+
+    /* each line break gets slight spacing */
+    .poem-white br {
+      content: "";
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* author line – white with red accent */
+    .signature-line {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: clamp(2px, 1vw, 4px);
+      text-transform: uppercase;
+      border-top: 1.5px solid rgba(255, 90, 120, 0.6);
+      display: inline-block;
+      padding-top: clamp(0.8rem, 2vh, 1.2rem);
+      padding-left: clamp(1rem, 3vw, 2rem);
+      padding-right: clamp(1rem, 3vw, 2rem);
+      margin-top: clamp(0.5rem, 2vh, 1rem);
+      max-width: 100%;
+    }
+
+    .signature-line span {
+      color: #ff5f7f;
+      font-weight: 500;
+      background: rgba(255, 70, 110, 0.15);
+      padding: 0.2rem clamp(0.6rem, 2vw, 1rem);
+      border-radius: 40px;
+      margin-left: 6px;
+      border: 1px solid #ff5f7f;
+      text-shadow: 0 0 8px #ff5f7f;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* hidden video for audio */
+    video {
+      display: none;
+    }
+
+    /* floating elements – very subtle, attractive */
+    .floating-glow {
+      position: fixed;
+      width: min(250px, 40vw);
+      height: min(250px, 40vw);
+      background: radial-gradient(circle, rgba(255, 70, 110, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 5;
+      pointer-events: none;
+      filter: blur(40px);
+      animation: moveGlow 12s infinite alternate;
+    }
+
+    @keyframes moveGlow {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      100% { transform: translate(30px, -20px) scale(1.2); opacity: 0.7; }
+    }
+
+    /* small minimalist hearts (very faint) */
+    .minimal-heart {
+      position: fixed;
+      color: rgba(255, 80, 120, 0.2);
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      z-index: 2;
+      pointer-events: none;
+      animation: drift 15s infinite linear;
+      user-select: none;
+      will-change: transform;
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      80% { opacity: 0.3; }
+      100% { transform: translateY(-20vh) rotate(20deg); opacity: 0; }
+    }
+
+    /* extra small devices (portrait phones) */
+    @media (max-width: 480px) {
+      body { padding: 0.5rem; }
+      .elegant-card { 
+        border-radius: 40px; 
+        padding: 1.5rem 1rem;
+      }
+      .poem-white { 
+        line-height: 1.6;
+        text-align: left; /* better readability on very small screens */
+        padding: 0 0.2rem;
+      }
+      .signature-line {
+        white-space: normal;
+        word-break: break-word;
+      }
+      .signature-line span {
+        white-space: normal;
+        margin-left: 0;
+        margin-top: 5px;
+        display: inline-block;
+      }
+    }
+
+    /* handle landscape orientation */
+    @media (max-height: 600px) and (orientation: landscape) {
+      body { align-items: flex-start; padding: 1rem; }
+      .elegant-card { margin: 1rem auto; }
+    }
+
+    /* ensure white text stays white */
+    .poem-white {
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 400;
+    }
+    
+    /* backdrop blur for card */
+    .elegant-card {
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+    }
+    
+    /* minimal heart opacity */
+    .minimal-heart {
+      opacity: 0.15;
+      filter: blur(1px);
+    }
+
+    /* responsive adjustments for very large screens */
+    @media (min-width: 1600px) {
+      .elegant-card { max-width: 1000px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- background glow -->
+  <div class="atmosphere"></div>
+
+  <!-- big floating soft glows (attractive) - using fixed positioning -->
+  <div class="floating-glow" style="top: 5%; left: 3%; background: radial-gradient(circle, rgba(255, 80, 120, 0.25) 0%, transparent 70%);"></div>
+  <div class="floating-glow" style="bottom: 5%; right: 3%; background: radial-gradient(circle, rgba(230, 50, 100, 0.2) 0%, transparent 70%); animation-delay: -5s;"></div>
+  <div class="floating-glow" style="top: 40%; right: 10%; width: min(200px, 30vw); height: min(200px, 30vw); background: radial-gradient(circle, rgba(255, 100, 140, 0.2) 0%, transparent 70%); animation-duration: 15s;"></div>
+
+  <!-- very faint drifting hearts (barely visible, adds depth) -->
+  <div class="minimal-heart" style="left: 5%; animation-duration: 14s;">❤️</div>
+  <div class="minimal-heart" style="left: 20%; animation-duration: 16s; animation-delay: 1s;">❤️</div>
+  <div class="minimal-heart" style="left: 40%; animation-duration: 18s; animation-delay: 2.5s;">❤️</div>
+  <div class="minimal-heart" style="left: 60%; animation-duration: 15s; animation-delay: 0.5s;">❤️</div>
+  <div class="minimal-heart" style="left: 75%; animation-duration: 20s; animation-delay: 3s;">❤️</div>
+  <div class="minimal-heart" style="left: 90%; animation-duration: 17s; animation-delay: 1.8s;">❤️</div>
+  <div class="minimal-heart" style="left: 15%; animation-duration: 22s; animation-delay: 4s;">❤️</div>
+  <div class="minimal-heart" style="left: 55%; animation-duration: 19s; animation-delay: 0.2s;">❤️</div>
+  <div class="minimal-heart" style="left: 85%; animation-duration: 21s; animation-delay: 2.2s;">❤️</div>
+
+  <!-- hidden video (audio) -->
+  <video autoplay loop playsinline muted>
+    <!-- muted added for autoplay policy, but if you need sound, remove muted -->
+    <source src="voice.mp4" type="video/mp4">
+    <!-- if missing, it's okay -->
+  </video>
+
+  <!-- main card – white text focus -->
+  <div class="elegant-card">
+    <div class="heart-sep">♡ ♡ ♡</div>
+
+    <!-- your poem – now pure white, attractive, elegant -->
+    <div class="poem-white">
+      प्रिय लिखकर नीचे लिख दूँ नाम तुम्हारा,<br>
+      कुछ जगह बीच में छोड़ नीचे लिख दूँ सदा तुम्हारा।<br>
+      लिखा बीच में क्या, ये तुमको पढ़ना है,<br>
+      काग़ज़ पर मन की भाषा का अर्थ समझना है।<br>
+      जो भी अर्थ निकालोगे तुम, वो मुझको स्वीकार,<br>
+      झुके अधर, झुकी नैन, मौन अधर या कोरा काग़ज़,<br>
+      अर्थ सभी का प्यार
+    </div>
+
+    <!-- signature line – white + red accent -->
+    <div class="signature-line">
+      ✦ only for you <span>❤️</span>
+    </div>
+  </div>
+
+  <script>
+    // handle missing video gracefully
+    (function() {
+      const video = document.querySelector('video');
+      if (video) {
+        video.addEventListener('error', () => {
+          // silently ignore – still attractive
+          console.log('video not found, but design remains beautiful');
+        });
+        
+        // Ensure video plays (some browsers need user interaction)
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay prevented – we can add a tiny invisible play button if needed
+            // but for now, just ignore
+          });
+        }
+      }
+
+      // adjust floating elements on resize (optional)
+      function adjustFloating() {
+        // nothing needed, but keeps responsiveness
+      }
+      window.addEventListener('resize', adjustFloating);
+    })();
+  </script>
+
+  <style>
+    /* additional responsive tweaks */
+    @media (max-width: 350px) {
+      .poem-white { font-size: 1.1rem; }
+      .signature-line { font-size: 0.8rem; letter-spacing: 1px; }
+      .heart-sep { font-size: 1.2rem; letter-spacing: 4px; }
+    }
+    
+    @media (min-width: 2000px) {
+      .poem-white { font-size: 2.5rem; }
+    }
+  </style>
+</body>
+</html>
