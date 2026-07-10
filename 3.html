@@ -65,6 +65,139 @@ body {
     line-height: 1.6;
 }
 
+/* ============================================================
+   BLACK CURTAINS – OPENING ANIMATION
+   ============================================================ */
+.curtain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    overflow: hidden;
+}
+
+.curtain-left,
+.curtain-right {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: #0a0a0a;
+    background-image: 
+        repeating-linear-gradient(0deg, 
+            rgba(30, 30, 30, 0.6) 0px, 
+            rgba(30, 30, 30, 0.6) 3px,
+            rgba(10, 10, 10, 0.8) 3px,
+            rgba(10, 10, 10, 0.8) 6px
+        );
+    overflow: hidden;
+    transition: transform 1.8s cubic-bezier(0.77, 0, 0.18, 1);
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9);
+}
+
+.curtain-left {
+    transform-origin: left center;
+    border-right: 2px solid rgba(255, 200, 130, 0.08);
+}
+
+.curtain-right {
+    transform-origin: right center;
+    border-left: 2px solid rgba(255, 200, 130, 0.08);
+}
+
+/* Curtain fold texture – vertical pleats */
+.curtain-left::before,
+.curtain-right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(90deg,
+            transparent 0px,
+            rgba(255, 255, 255, 0.02) 4px,
+            transparent 8px,
+            transparent 20px,
+            rgba(255, 255, 255, 0.015) 24px,
+            transparent 28px
+        );
+    pointer-events: none;
+}
+
+/* Golden top rod / curtain rail */
+.curtain-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, 
+        #2a1a0a, 
+        #b8860b, 
+        #ffd700, 
+        #b8860b, 
+        #2a1a0a
+    );
+    z-index: 10;
+    box-shadow: 0 4px 30px rgba(255, 215, 0, 0.15);
+}
+
+/* Curtain ring details */
+.curtain-container::after {
+    content: '⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️ ⚜️';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    letter-spacing: 20px;
+    opacity: 0.2;
+    z-index: 11;
+    white-space: nowrap;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+/* Golden tassel / tie-back detail */
+.curtain-left::after,
+.curtain-right::after {
+    content: '✦';
+    position: absolute;
+    bottom: 30%;
+    font-size: 24px;
+    color: #b8860b;
+    opacity: 0.15;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.curtain-left::after {
+    right: 20px;
+}
+
+.curtain-right::after {
+    left: 20px;
+}
+
+/* Curtain open state */
+.curtain-open .curtain-left {
+    transform: translateX(-100%);
+}
+
+.curtain-open .curtain-right {
+    transform: translateX(100%);
+}
+
+/* Curtain content hidden while opening */
+.curtain-container.active {
+    pointer-events: none;
+}
+
 /* Animated background with particles */
 .bg-animation {
     position: fixed;
@@ -152,7 +285,7 @@ body {
     padding: 0 var(--container-padding);
 }
 
-/* Music boxes grid - Updated for larger Lottie animations */
+/* Music boxes grid */
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
@@ -233,10 +366,10 @@ body {
     gap: clamp(0.75rem, 3vw, 1rem);
 }
 
-/* Lottie Container - SIGNIFICANTLY LARGER */
+/* Lottie Container */
 .lottie-container {
-    width: clamp(180px, 40vw, 220px); /* Increased from 140px */
-    height: clamp(180px, 40vw, 220px); /* Increased from 140px */
+    width: clamp(180px, 40vw, 220px);
+    height: clamp(180px, 40vw, 220px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -260,7 +393,6 @@ body {
     z-index: -1;
 }
 
-/* Lottie player specific styling for larger animations */
 lottie-player {
     width: 100% !important;
     height: 100% !important;
@@ -701,7 +833,7 @@ lottie-player {
 /* Print styles */
 @media print {
     .bg-animation, .particles, .play-overlay, .secret-badge,
-    .popup, .player, .footer i {
+    .popup, .player, .footer i, .curtain-container {
         display: none !important;
     }
     
@@ -719,6 +851,14 @@ lottie-player {
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     BLACK CURTAINS – OPENING ANIMATION
+     ============================================================ -->
+<div class="curtain-container" id="curtainContainer">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+</div>
 
 <!-- Background elements -->
 <div class="bg-animation"></div>
@@ -824,6 +964,26 @@ lottie-player {
                 </div>
             </div>
         </div>
+
+        <!-- ============================================================
+             BOX 6 – NEW CARD ADDED AT THE END
+             ============================================================ -->
+        <div class="box" onclick="playSong(6)">
+            <div class="box-content">
+                <div class="box-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_hggvnfhq.json" background="transparent" speed="1" style="width:100%;height:100%" loop autoplay></lottie-player>
+                </div>
+                <div class="label">"Every moment with you is a treasure worth keeping."</div>
+            </div>
+            <div class="play-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="footer">
@@ -860,6 +1020,27 @@ lottie-player {
 </div>
 
 <script>
+// ============================================================
+// BLACK CURTAINS – OPENING ANIMATION
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    const curtainContainer = document.getElementById('curtainContainer');
+    
+    // Small delay so everything loads, then open curtains
+    setTimeout(function() {
+        curtainContainer.classList.add('curtain-open');
+        
+        // After curtain opens, hide it completely
+        setTimeout(function() {
+            curtainContainer.style.display = 'none';
+        }, 2000);
+    }, 600);
+});
+
+// ============================================================
+// EXISTING FUNCTIONALITY (unchanged)
+// ============================================================
+
 // Create floating particles (optimized for mobile)
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
@@ -888,14 +1069,14 @@ function createParticles() {
     }
 }
 
-// Songs data
+// Songs data (updated with 6)
 const songs = {
     1: { title: " ", url: "secret.mp4" },
     2: { title: "", url: "Video-369.mp4" },
     3: { title: "", url: "Video-917.mp4" },
     4: { title: "", url: "penguvin.mp4" },
     5: { title: "", url: "flower.mp4" },
-    6: { title: "", url: "song6.mp3" }
+    6: { title: "", url: "song6.mp3" }  // New song for box 6
 };
 
 // Function to open secret popup
@@ -908,7 +1089,6 @@ function openPopup() {
 function checkCode() {
     let val = document.getElementById("code").value;
     if (val === "21") {
-        // Animate success
         const popup = document.querySelector('.popup-box');
         popup.style.transform = 'scale(1.05)';
         setTimeout(() => {
@@ -918,7 +1098,6 @@ function checkCode() {
             play(1);
         }, 300);
     } else {
-        // Animate error
         const input = document.getElementById("code");
         input.style.borderColor = '#ef4444';
         input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.2)';
@@ -928,7 +1107,6 @@ function checkCode() {
             input.style.boxShadow = '';
         }, 1000);
         
-        // Shake animation
         input.style.animation = 'shake 0.5s';
         setTimeout(() => {
             input.style.animation = '';
@@ -979,7 +1157,6 @@ function closePlayer() {
     document.getElementById("video").pause();
     document.getElementById("audio").pause();
     
-    // Fade out animation
     const player = document.getElementById("player");
     player.style.opacity = '0';
     setTimeout(() => {
