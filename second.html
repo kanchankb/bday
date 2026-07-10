@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Happy Birthday Amar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,23 +21,24 @@
             background: #000000;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         body {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0;
         }
 
         .card {
             position: relative;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
             height: 100dvh;
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
             background: #0a0a0a;
             overflow: hidden;
             display: flex;
@@ -144,7 +145,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 1.2rem;
+            padding: 1rem;
             text-align: center;
             width: 100%;
             height: 100%;
@@ -213,21 +214,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.1rem;
+            gap: 0.15rem;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             padding: 0 0.3rem;
         }
 
-        /* ----- HEADING WITH HEART ----- */
+        /* ----- BIG HEADING WITH HEART ----- */
         .main-heading {
             position: absolute;
             top: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 15;
-            font-size: clamp(1.2rem, 5.5vw, 2.8rem);
-            font-weight: 800;
+            font-size: clamp(1.8rem, 7vw, 3.5rem);
+            font-weight: 900;
             letter-spacing: 0.02em;
             background: linear-gradient(135deg, #fae3c0 0%, #f5d4a8 30%, #eacba1 60%, #fae3c0 100%);
             -webkit-background-clip: text;
@@ -242,17 +243,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.2rem;
+            gap: 0.3rem;
             width: auto;
         }
 
         .main-heading .heart-icon {
             display: inline-block;
-            font-size: clamp(1rem, 4vw, 2.2rem);
+            font-size: clamp(1.4rem, 5vw, 2.8rem);
             background: none;
             -webkit-text-fill-color: initial;
             color: #ff6b6b;
-            filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.2));
+            filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.3));
             animation: heartBeat 1.2s ease-in-out infinite;
             line-height: 1;
             flex-shrink: 0;
@@ -260,33 +261,33 @@
 
         @keyframes heartBeat {
             0%, 100% { transform: scale(1); }
-            15% { transform: scale(1.2); }
+            15% { transform: scale(1.25); }
             30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
+            45% { transform: scale(1.2); }
             60% { transform: scale(1); }
         }
 
         @keyframes headingGlow {
             0%, 100% { filter: drop-shadow(0 0 20px rgba(210, 180, 140, 0.08)); }
-            50% { filter: drop-shadow(0 0 40px rgba(210, 180, 140, 0.2)); }
+            50% { filter: drop-shadow(0 0 50px rgba(210, 180, 140, 0.25)); }
         }
 
         .line-deco {
-            width: 60px;
-            height: 1.5px;
+            width: 70px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, #d4b68a, #f5d4a8, #d4b68a, transparent);
-            margin: 0.05rem 0 0.1rem;
-            opacity: 0.4;
+            margin: 0.1rem 0 0.15rem;
+            opacity: 0.5;
             border-radius: 2px;
             animation: expandLine 1.5s ease forwards;
         }
 
         @keyframes expandLine {
             0% { width: 0; opacity: 0; }
-            100% { width: 60px; opacity: 0.4; }
+            100% { width: 70px; opacity: 0.5; }
         }
 
-        /* ----- PHOTO DISPLAY ----- */
+        /* ----- BIG PHOTO DISPLAY ----- */
         .photo-container {
             position: relative;
             display: flex;
@@ -294,16 +295,16 @@
             align-items: center;
             margin: 0.1rem 0;
             animation: fadeInUp 1.4s ease forwards;
-            margin-top: 0.8rem;
+            margin-top: 0.5rem;
         }
 
         .photo-frame {
-            width: clamp(100px, 22vw, 160px);
-            height: clamp(100px, 22vw, 160px);
+            width: clamp(140px, 32vw, 230px);
+            height: clamp(140px, 32vw, 230px);
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid rgba(210, 180, 140, 0.12);
-            box-shadow: 0 0 30px rgba(210, 180, 140, 0.04), inset 0 0 30px rgba(0,0,0,0.3);
+            border: 3px solid rgba(210, 180, 140, 0.15);
+            box-shadow: 0 0 40px rgba(210, 180, 140, 0.06), inset 0 0 40px rgba(0,0,0,0.3);
             position: relative;
             transition: all 0.3s ease;
             flex-shrink: 0;
@@ -312,10 +313,10 @@
         .photo-frame::before {
             content: '';
             position: absolute;
-            inset: -3px;
+            inset: -4px;
             border-radius: 50%;
-            padding: 3px;
-            background: conic-gradient(from 0deg, transparent, rgba(210, 180, 140, 0.08), rgba(210, 180, 140, 0.15), transparent);
+            padding: 4px;
+            background: conic-gradient(from 0deg, transparent, rgba(210, 180, 140, 0.1), rgba(210, 180, 140, 0.2), transparent);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -330,28 +331,17 @@
             display: block;
         }
 
-        .photo-frame .placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #141414, #1a1a1a);
-            color: rgba(255, 215, 150, 0.15);
-            font-size: 2.5rem;
-        }
-
         @keyframes spinGlow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         .photo-label {
-            font-size: clamp(0.5rem, 1.2vw, 0.7rem);
+            font-size: clamp(0.6rem, 1.5vw, 0.9rem);
             font-weight: 300;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
-            color: rgba(255, 235, 210, 0.2);
+            color: rgba(255, 235, 210, 0.25);
             margin-top: 0.3rem;
         }
 
@@ -361,7 +351,7 @@
             padding: 0.1rem 0.3rem;
             position: relative;
             animation: fadeInUp 1.8s ease forwards;
-            min-height: 40px;
+            min-height: 38px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -370,22 +360,22 @@
         }
 
         .quote-text {
-            font-size: clamp(0.65rem, 1.8vw, 0.95rem);
+            font-size: clamp(0.75rem, 2.2vw, 1.1rem);
             font-weight: 300;
-            color: rgba(255, 235, 210, 0.45);
+            color: rgba(255, 235, 210, 0.5);
             letter-spacing: 0.04em;
             line-height: 1.5;
             font-style: italic;
             position: relative;
-            padding: 0 1rem;
+            padding: 0 1.2rem;
             transition: opacity 0.8s ease, transform 0.8s ease;
             text-align: center;
         }
 
         .quote-text::before {
             content: '"';
-            font-size: 1.2rem;
-            color: rgba(210, 180, 140, 0.08);
+            font-size: 1.4rem;
+            color: rgba(210, 180, 140, 0.1);
             position: absolute;
             left: -0.1rem;
             top: -0.3rem;
@@ -394,8 +384,8 @@
 
         .quote-text::after {
             content: '"';
-            font-size: 1.2rem;
-            color: rgba(210, 180, 140, 0.08);
+            font-size: 1.4rem;
+            color: rgba(210, 180, 140, 0.1);
             position: absolute;
             right: -0.1rem;
             bottom: -0.3rem;
@@ -414,51 +404,51 @@
 
         .quote-dots {
             display: flex;
-            gap: 0.4rem;
+            gap: 0.5rem;
             margin-top: 0.2rem;
         }
 
         .quote-dot {
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: rgba(255, 215, 150, 0.12);
-            border: 1px solid rgba(255, 215, 150, 0.04);
+            background: rgba(255, 215, 150, 0.15);
+            border: 1px solid rgba(255, 215, 150, 0.05);
             cursor: pointer;
             transition: all 0.3s ease;
             animation: fadeInUp 2s ease forwards;
         }
 
         .quote-dot.active {
-            background: rgba(210, 180, 140, 0.35);
-            border-color: rgba(210, 180, 140, 0.15);
-            box-shadow: 0 0 12px rgba(210, 180, 140, 0.1);
-            transform: scale(1.2);
+            background: rgba(210, 180, 140, 0.4);
+            border-color: rgba(210, 180, 140, 0.2);
+            box-shadow: 0 0 15px rgba(210, 180, 140, 0.12);
+            transform: scale(1.3);
         }
 
         .age-sub {
-            font-size: clamp(0.45rem, 0.9vw, 0.6rem);
-            color: rgba(255, 235, 210, 0.08);
-            letter-spacing: 0.25em;
+            font-size: clamp(0.5rem, 1vw, 0.7rem);
+            color: rgba(255, 235, 210, 0.1);
+            letter-spacing: 0.3em;
             margin-top: 0.1rem;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
             animation: fadeInUp 2s ease forwards;
         }
 
         .sparkle-dots {
             display: flex;
-            gap: 0.3rem;
+            gap: 0.4rem;
             margin-top: 0.1rem;
             animation: fadeInUp 2.2s ease forwards;
         }
 
         .sparkle-dots span {
-            width: 3px;
-            height: 3px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            background: rgba(255, 215, 150, 0.08);
+            background: rgba(255, 215, 150, 0.1);
             animation: dotPulse 2s ease-in-out infinite;
         }
 
@@ -468,8 +458,8 @@
         .sparkle-dots span:nth-child(5) { animation-delay: 1.2s; }
 
         @keyframes dotPulse {
-            0%, 100% { opacity: 0.08; transform: scale(1); }
-            50% { opacity: 0.35; transform: scale(1.5); }
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.5); }
         }
 
         @keyframes fadeInUp {
@@ -502,15 +492,15 @@
         }
 
         .message-icon .icon-circle {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(210, 180, 140, 0.12), rgba(210, 180, 140, 0.04));
-            border: 1.5px solid rgba(210, 180, 140, 0.15);
+            background: linear-gradient(135deg, rgba(210, 180, 140, 0.15), rgba(210, 180, 140, 0.05));
+            border: 1.5px solid rgba(210, 180, 140, 0.18);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: all 0.3s ease;
@@ -522,9 +512,9 @@
         }
 
         .message-icon .icon-label {
-            font-size: 0.45rem;
+            font-size: 0.5rem;
             font-weight: 300;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
             color: rgba(255, 235, 210, 0.15);
             text-transform: uppercase;
         }
@@ -535,7 +525,7 @@
 
         @keyframes iconPulse {
             0%, 100% { box-shadow: 0 0 20px rgba(210, 180, 140, 0.04); }
-            50% { box-shadow: 0 0 40px rgba(210, 180, 140, 0.12); }
+            50% { box-shadow: 0 0 50px rgba(210, 180, 140, 0.15); }
         }
 
         /* ----- TOGGLE BUTTON ----- */
@@ -549,10 +539,10 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 215, 150, 0.06);
             color: #e6d9c8;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.55rem;
+            font-size: 0.65rem;
             font-weight: 400;
             letter-spacing: 0.06em;
             cursor: pointer;
@@ -584,8 +574,8 @@
             bottom: 0.8rem;
             left: 1rem;
             z-index: 15;
-            font-size: 0.4rem;
-            color: rgba(255, 215, 150, 0.04);
+            font-size: 0.45rem;
+            color: rgba(255, 215, 150, 0.05);
             letter-spacing: 0.25em;
             font-weight: 300;
             pointer-events: none;
@@ -595,36 +585,40 @@
         @media (max-width: 480px) {
             .main-heading {
                 top: 1rem;
-                font-size: clamp(1rem, 4.8vw, 1.6rem);
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
                 white-space: normal;
                 line-height: 1.2;
                 gap: 0.15rem;
             }
             .main-heading .heart-icon {
-                font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+                font-size: clamp(1.2rem, 4.5vw, 2rem);
             }
             .photo-frame {
-                width: clamp(80px, 20vw, 120px);
-                height: clamp(80px, 20vw, 120px);
+                width: clamp(120px, 30vw, 180px);
+                height: clamp(120px, 30vw, 180px);
             }
             .quote-text {
-                font-size: 0.6rem;
-                padding: 0 0.6rem;
+                font-size: clamp(0.65rem, 2vw, 0.9rem);
+                padding: 0 0.8rem;
             }
             .quote-text::before,
             .quote-text::after {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
             .quote-text::before { left: -0.05rem; top: -0.2rem; }
             .quote-text::after { right: -0.05rem; bottom: -0.2rem; }
             .toggle-btn {
                 bottom: 0.7rem;
                 right: 0.7rem;
-                padding: 0.35rem 0.8rem;
-                font-size: 0.5rem;
+                padding: 0.4rem 1rem;
+                font-size: 0.55rem;
+            }
+            .toggle-btn svg {
+                width: 10px;
+                height: 10px;
             }
             .credit {
-                bottom: 0.6rem;
+                bottom: 0.5rem;
                 left: 0.7rem;
                 font-size: 0.35rem;
             }
@@ -637,75 +631,88 @@
                 bottom: 4rem;
             }
             .message-icon .icon-circle {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+                width: 44px;
+                height: 44px;
+                font-size: 1.4rem;
             }
             .line-deco {
-                width: 50px;
+                width: 60px;
             }
             @keyframes expandLine {
                 0% { width: 0; opacity: 0; }
-                100% { width: 50px; opacity: 0.4; }
+                100% { width: 60px; opacity: 0.5; }
             }
             .photo-label {
-                font-size: 0.45rem;
+                font-size: 0.5rem;
                 margin-top: 0.2rem;
             }
             .quote-container {
-                min-height: 35px;
+                min-height: 34px;
             }
             .age-sub {
-                font-size: 0.4rem;
+                font-size: 0.45rem;
+            }
+            .sparkle-dots span {
+                width: 3px;
+                height: 3px;
             }
         }
 
         @media (max-width: 380px) {
             .main-heading {
                 top: 0.7rem;
-                font-size: clamp(0.8rem, 4vw, 1.2rem);
+                font-size: clamp(1.2rem, 5vw, 1.8rem);
             }
             .main-heading .heart-icon {
-                font-size: clamp(0.7rem, 3vw, 1rem);
+                font-size: clamp(1rem, 3.5vw, 1.5rem);
             }
             .photo-frame {
-                width: clamp(65px, 17vw, 90px);
-                height: clamp(65px, 17vw, 90px);
+                width: clamp(100px, 26vw, 140px);
+                height: clamp(100px, 26vw, 140px);
             }
             .quote-text {
-                font-size: 0.5rem;
+                font-size: 0.55rem;
             }
             .message-icon .icon-circle {
-                width: 34px;
-                height: 34px;
-                font-size: 1rem;
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
             }
             .message-icon {
                 bottom: 3.5rem;
             }
             .toggle-btn {
-                padding: 0.3rem 0.7rem;
-                font-size: 0.45rem;
+                padding: 0.3rem 0.8rem;
+                font-size: 0.5rem;
             }
             .toggle-btn svg {
-                width: 10px;
-                height: 10px;
+                width: 9px;
+                height: 9px;
             }
         }
 
         @media (min-height: 800px) {
             .main-heading {
-                top: 2.2rem;
+                top: 2rem;
+                font-size: clamp(2rem, 6vw, 4rem);
+            }
+            .main-heading .heart-icon {
+                font-size: clamp(1.6rem, 4.5vw, 3rem);
             }
             .photo-frame {
-                width: clamp(120px, 25vw, 180px);
-                height: clamp(120px, 25vw, 180px);
+                width: clamp(160px, 30vw, 240px);
+                height: clamp(160px, 30vw, 240px);
             }
             .message-icon {
                 bottom: 5.5rem;
             }
+            .message-icon .icon-circle {
+                width: 56px;
+                height: 56px;
+                font-size: 1.8rem;
+            }
             .quote-text {
-                font-size: clamp(0.8rem, 2vw, 1.1rem);
+                font-size: clamp(0.8rem, 2vw, 1.2rem);
             }
         }
 
@@ -714,16 +721,6 @@
                 border-radius: 2.8rem;
                 max-width: 500px;
                 max-height: 900px;
-            }
-            .main-heading {
-                font-size: clamp(1.8rem, 4vw, 3.5rem);
-            }
-            .main-heading .heart-icon {
-                font-size: clamp(1.5rem, 3vw, 2.8rem);
-            }
-            .photo-frame {
-                width: clamp(140px, 25vw, 200px);
-                height: clamp(140px, 25vw, 200px);
             }
         }
 
@@ -761,7 +758,7 @@
                 <div class="particle"></div>
             </div>
 
-            <!-- MAIN HEADING WITH HEART ICON -->
+            <!-- BIG HEADING WITH HEART ICON -->
             <div class="main-heading">
                 Happy Birthday Amar
                 <span class="heart-icon">❤️</span>
@@ -770,11 +767,11 @@
             <div class="greeting-wrapper">
                 <div class="line-deco"></div>
                 
-                <!-- PHOTO DISPLAY -->
+                <!-- BIG PHOTO DISPLAY -->
                 <div class="photo-container">
                     <div class="photo-frame">
-                        <!-- Replace src with your image URL -->
-                        <img src="https://via.placeholder.com/200/1a1a1a/d4b68a?text=📸" alt="Amar's Photo" id="profilePhoto">
+                        <!-- REPLACE WITH YOUR IMAGE URL -->
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231a1a1a'/%3E%3Ctext x='150' y='160' font-family='Arial' font-size='70' text-anchor='middle' fill='%23d4b68a' opacity='0.3'%3E📸%3C/text%3E%3C/svg%3E" alt="Amar's Photo" id="profilePhoto">
                     </div>
                     <div class="photo-label">✦ Amar ✦</div>
                 </div>
@@ -814,13 +811,13 @@
 
         <!-- Toggle button -->
         <button class="toggle-btn" id="toggleCurtainBtn" aria-label="Toggle curtains">
-            <svg viewBox="0 0 24 24" width="12" height="12">
+            <svg viewBox="0 0 24 24">
                 <path d="M3 6h18M3 12h18M3 18h18" />
             </svg>
             <span id="btnLabel">Open</span>
         </button>
 
-        <div class="credit">✦  AMAR  ✦</div>
+        <div class="credit">✦ AMAR ✦</div>
     </div>
 
     <script>
@@ -834,6 +831,7 @@
             const profilePhoto = document.getElementById('profilePhoto');
 
             // ----- REPLACE WITH YOUR IMAGE URL -----
+            // Uncomment and add your image path:
             // profilePhoto.src = 'your-photo.jpg';
             // Or use: profilePhoto.src = 'https://your-image-url.com/photo.jpg';
 
