@@ -866,13 +866,13 @@ lottie-player {
 
 <div class="main-container">
     <div class="header">
-        <h1>LOTTIE MUSIC BOX</h1>
-        <p>Each animated box holds a special musical memory. Click to reveal the emotions within.</p>
+        <h1>When my feelings become the story.</h1>
+        <!-- <p>POV: My feelings got edited into a reel. 🎬😂</p> -->
     </div>
 
     <div class="container">
-        <!-- Box 1: Secret -->
-        <div class="box" onclick="openPopup()">
+        <!-- Box 1: Secret - NOW OPENS video.html DIRECTLY -->
+        <div class="box" onclick="openSecretPage()">
             <div class="secret-badge">
                 <i class="fas fa-lock"></i>
                 Secret
@@ -965,9 +965,7 @@ lottie-player {
             </div>
         </div>
 
-        <!-- ============================================================
-             BOX 6 – NEW CARD ADDED AT THE END
-             ============================================================ -->
+        <!-- Box 6 -->
         <div class="box" onclick="playSong(6)">
             <div class="box-content">
                 <div class="box-icon">
@@ -991,7 +989,7 @@ lottie-player {
     </div>
 </div>
 
-<!-- Secret Popup -->
+<!-- Secret Popup (kept but no longer used for Box 1) -->
 <div class="popup" id="popup">
     <div class="popup-box">
         <h3>Enter Secret Code</h3>
@@ -1038,6 +1036,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
+// NEW FUNCTION – Opens video.html directly (Box 1)
+// ============================================================
+function openSecretPage() {
+    // Navigate directly to video.html
+    window.location.href = 'video.html';
+}
+
+// ============================================================
 // EXISTING FUNCTIONALITY (unchanged)
 // ============================================================
 
@@ -1069,23 +1075,23 @@ function createParticles() {
     }
 }
 
-// Songs data (updated with 6)
+// Songs data (6 songs)
 const songs = {
     1: { title: " ", url: "secret.mp4" },
     2: { title: "", url: "Video-369.mp4" },
     3: { title: "", url: "Video-917.mp4" },
     4: { title: "", url: "penguvin.mp4" },
     5: { title: "", url: "flower.mp4" },
-    6: { title: "", url: "song6.mp3" }  // New song for box 6
+    6: { title: "", url: "song6.mp3" }
 };
 
-// Function to open secret popup
+// Function to open secret popup (kept for reference, not used for Box 1 anymore)
 function openPopup() {
     document.getElementById("popup").style.display = "flex";
     document.getElementById("code").focus();
 }
 
-// Function to check secret code
+// Function to check secret code (kept for reference)
 function checkCode() {
     let val = document.getElementById("code").value;
     if (val === "21") {
