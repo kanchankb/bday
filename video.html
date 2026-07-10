@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>attractive · white text · for you</title>
+  <title>✨ For You · White Poem</title>
   <!-- modern clean fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -14,7 +14,7 @@
     }
 
     body {
-      background: #000000;  /* pure black background */
+      background: #000000;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -23,10 +23,10 @@
       padding: 1rem;
       position: relative;
       overflow-x: hidden;
-      overflow-y: auto;  /* allow scrolling on small devices */
+      overflow-y: auto;
     }
 
-    /* subtle animated gradient overlay (very soft) */
+    /* subtle animated gradient overlay */
     .atmosphere {
       position: fixed;
       inset: 0;
@@ -42,7 +42,70 @@
       100% { opacity: 0.9; filter: blur(12px); }
     }
 
-    /* main card – minimal, elegant, focus on white text */
+    /* ============================================================
+       BACK ARROW BUTTON (fixed position)
+       ============================================================ */
+    .back-arrow {
+      position: fixed;
+      top: clamp(18px, 4vh, 30px);
+      left: clamp(16px, 4vw, 30px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 70, 110, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 70, 110, 0.4);
+      border-radius: 50px;
+      padding: clamp(10px, 2.5vw, 14px) clamp(14px, 3vw, 22px);
+      color: #ffffff;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 70, 110, 0.2);
+      letter-spacing: 0.3px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .back-arrow i {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .back-arrow:hover {
+      background: rgba(255, 70, 110, 0.3);
+      border-color: rgba(255, 70, 110, 0.7);
+      transform: translateX(-4px) scale(1.02);
+      box-shadow: 0 8px 35px rgba(255, 70, 110, 0.35);
+    }
+
+    .back-arrow:active {
+      transform: scale(0.94);
+    }
+
+    .back-arrow .arrow-text {
+      display: inline-block;
+    }
+
+    /* hide text on very small screens, show only icon */
+    @media (max-width: 420px) {
+      .back-arrow .arrow-text {
+        display: none;
+      }
+      .back-arrow {
+        padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 14px);
+        border-radius: 50%;
+      }
+    }
+
+    /* ============================================================
+       MAIN CARD
+       ============================================================ */
     .elegant-card {
       position: relative;
       z-index: 20;
@@ -59,16 +122,15 @@
                   0 0 50px #ff2f5f40;
       text-align: center;
       transition: all 0.3s;
-      margin: 1.5rem auto;
+      margin: clamp(4rem, 10vh, 6rem) auto 1.5rem;
     }
 
-    /* subtle red border glow */
     .elegant-card:hover {
       box-shadow: 0 35px 80px -15px #ff3f6f, 0 0 0 3px rgba(255, 120, 150, 0.4) inset;
       border-color: rgba(255, 90, 120, 0.8);
     }
 
-    /* tiny hearts separator – minimal */
+    /* tiny hearts separator */
     .heart-sep {
       font-size: clamp(1.4rem, 4vw, 1.8rem);
       letter-spacing: clamp(6px, 2vw, 12px);
@@ -85,22 +147,22 @@
       font-size: clamp(1.3rem, 4vw, 2.1rem);
       font-weight: 400;
       line-height: 1.7;
-      color: #ffffff;           /* pure white */
+      color: #ffffff;
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.4),
                    0 0 30px rgba(255, 80, 120, 0.3);
       margin: clamp(1rem, 3vh, 1.8rem) 0 clamp(1.2rem, 3vh, 2rem);
       letter-spacing: 0.3px;
       word-break: break-word;
+      white-space: pre-wrap;
     }
 
-    /* each line break gets slight spacing */
     .poem-white br {
       content: "";
       margin-bottom: 0.5rem;
       display: block;
     }
 
-    /* author line – white with red accent */
+    /* signature line */
     .signature-line {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
@@ -135,7 +197,7 @@
       display: none;
     }
 
-    /* floating elements – very subtle, attractive */
+    /* floating elements */
     .floating-glow {
       position: fixed;
       width: min(250px, 40vw);
@@ -153,7 +215,7 @@
       100% { transform: translate(30px, -20px) scale(1.2); opacity: 0.7; }
     }
 
-    /* small minimalist hearts (very faint) */
+    /* minimalist hearts */
     .minimal-heart {
       position: fixed;
       color: rgba(255, 80, 120, 0.2);
@@ -172,17 +234,23 @@
       100% { transform: translateY(-20vh) rotate(20deg); opacity: 0; }
     }
 
-    /* extra small devices (portrait phones) */
+    /* ============================================================
+       RESPONSIVE FINE-TUNING
+       ============================================================ */
+
+    /* extra small devices */
     @media (max-width: 480px) {
       body { padding: 0.5rem; }
       .elegant-card { 
         border-radius: 40px; 
         padding: 1.5rem 1rem;
+        margin-top: clamp(3.5rem, 8vh, 4.5rem);
       }
       .poem-white { 
         line-height: 1.6;
-        text-align: left; /* better readability on very small screens */
+        text-align: left;
         padding: 0 0.2rem;
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
       }
       .signature-line {
         white-space: normal;
@@ -194,49 +262,88 @@
         margin-top: 5px;
         display: inline-block;
       }
+      .back-arrow {
+        top: clamp(12px, 3vh, 18px);
+        left: clamp(12px, 3vw, 16px);
+        padding: 10px 12px;
+      }
     }
 
-    /* handle landscape orientation */
+    /* very small screens */
+    @media (max-width: 360px) {
+      .poem-white { font-size: 1rem; }
+      .signature-line { font-size: 0.75rem; letter-spacing: 1px; }
+      .heart-sep { font-size: 1.1rem; letter-spacing: 4px; }
+      .elegant-card { padding: 1rem 0.8rem; }
+    }
+
+    /* landscape orientation */
     @media (max-height: 600px) and (orientation: landscape) {
-      body { align-items: flex-start; padding: 1rem; }
-      .elegant-card { margin: 1rem auto; }
+      body { align-items: flex-start; padding: 0.8rem; }
+      .elegant-card { margin: clamp(3.5rem, 12vh, 4.5rem) auto 1rem; }
+      .poem-white { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
     }
 
-    /* ensure white text stays white */
+    /* large screens */
+    @media (min-width: 1600px) {
+      .elegant-card { max-width: 1000px; }
+      .poem-white { font-size: 2.3rem; }
+    }
+
+    /* tablet */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .poem-white { font-size: clamp(1.4rem, 3.5vw, 1.8rem); }
+      .elegant-card { padding: 2.5rem 2rem; }
+    }
+
     .poem-white {
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       font-weight: 400;
     }
     
-    /* backdrop blur for card */
     .elegant-card {
       backdrop-filter: blur(12px) saturate(180%);
       -webkit-backdrop-filter: blur(12px) saturate(180%);
     }
     
-    /* minimal heart opacity */
     .minimal-heart {
       opacity: 0.15;
       filter: blur(1px);
     }
 
-    /* responsive adjustments for very large screens */
-    @media (min-width: 1600px) {
-      .elegant-card { max-width: 1000px; }
+    /* scrollbar styling (optional) */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 70, 110, 0.3);
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
+
+  <!-- ============================================================
+       BACK ARROW – navigates to 3.html
+       ============================================================ -->
+  <a href="3.html" class="back-arrow" aria-label="Go back">
+    <i>←</i>
+    <span class="arrow-text">Back</span>
+  </a>
+
   <!-- background glow -->
   <div class="atmosphere"></div>
 
-  <!-- big floating soft glows (attractive) - using fixed positioning -->
+  <!-- floating soft glows -->
   <div class="floating-glow" style="top: 5%; left: 3%; background: radial-gradient(circle, rgba(255, 80, 120, 0.25) 0%, transparent 70%);"></div>
   <div class="floating-glow" style="bottom: 5%; right: 3%; background: radial-gradient(circle, rgba(230, 50, 100, 0.2) 0%, transparent 70%); animation-delay: -5s;"></div>
   <div class="floating-glow" style="top: 40%; right: 10%; width: min(200px, 30vw); height: min(200px, 30vw); background: radial-gradient(circle, rgba(255, 100, 140, 0.2) 0%, transparent 70%); animation-duration: 15s;"></div>
 
-  <!-- very faint drifting hearts (barely visible, adds depth) -->
+  <!-- drifting hearts -->
   <div class="minimal-heart" style="left: 5%; animation-duration: 14s;">❤️</div>
   <div class="minimal-heart" style="left: 20%; animation-duration: 16s; animation-delay: 1s;">❤️</div>
   <div class="minimal-heart" style="left: 40%; animation-duration: 18s; animation-delay: 2.5s;">❤️</div>
@@ -249,71 +356,55 @@
 
   <!-- hidden video (audio) -->
   <video autoplay loop playsinline muted>
-    <!-- muted added for autoplay policy, but if you need sound, remove muted -->
     <source src="voice.mp4" type="video/mp4">
-    <!-- if missing, it's okay -->
   </video>
 
-  <!-- main card – white text focus -->
+  <!-- ============================================================
+       MAIN CARD
+       ============================================================ -->
   <div class="elegant-card">
     <div class="heart-sep">♡ ♡ ♡</div>
 
-    <!-- your poem – now pure white, attractive, elegant -->
     <div class="poem-white">
-      प्रिय लिखकर नीचे लिख दूँ नाम तुम्हारा,<br>
-      कुछ जगह बीच में छोड़ नीचे लिख दूँ सदा तुम्हारा।<br>
-      लिखा बीच में क्या, ये तुमको पढ़ना है,<br>
-      काग़ज़ पर मन की भाषा का अर्थ समझना है।<br>
-      जो भी अर्थ निकालोगे तुम, वो मुझको स्वीकार,<br>
-      झुके अधर, झुकी नैन, मौन अधर या कोरा काग़ज़,<br>
-      अर्थ सभी का प्यार
+Happy Birthday, my love. ❤️
+
+I don't think you'll ever truly realize how much you've changed my life. You came into my life when I was going through one of the hardest phases, a time when I thought I would never be able to find my way out. But you never gave up on me. You stood beside me, believed in me when I couldn't believe in myself, and patiently helped me heal, one day at a time.
+
+Your love, your endless support, and the way you cared for me gave me the strength to smile again. You made me feel safe, valued, and deeply loved. Thank you for every little thing you did, every comforting word, every hug, every laugh, and for loving me even on the days when I couldn't love myself.
+
+You didn't just become my boyfriend—you became my home, my peace, my biggest strength, and the reason I started believing in life again. I will always be grateful for you and everything you've done for me.
+
+I hope this birthday brings you even a fraction of the happiness you've given me. You deserve every beautiful thing this world has to offer. Happy Birthday to the most amazing person in my life. I love you more than words can ever express. ❤️
+
+
+प्रिय लिखकर नीचे लिख दूँ नाम तुम्हारा,
+कुछ जगह बीच में छोड़ नीचे लिख दूँ सदा तुम्हारा।
+लिखा बीच में क्या, ये तुमको पढ़ना है,
+काग़ज़ पर मन की भाषा का अर्थ समझना है।
+जो भी अर्थ निकालोगे तुम, वो मुझको स्वीकार,
+झुके अधर, झुकी नैन, मौन अधर या कोरा काग़ज़,
+अर्थ सभी का प्यार
     </div>
 
-    <!-- signature line – white + red accent -->
     <div class="signature-line">
       ✦ only for you <span>❤️</span>
     </div>
   </div>
 
   <script>
-    // handle missing video gracefully
     (function() {
       const video = document.querySelector('video');
       if (video) {
         video.addEventListener('error', () => {
-          // silently ignore – still attractive
-          console.log('video not found, but design remains beautiful');
+          console.log('video not found');
         });
         
-        // Ensure video plays (some browsers need user interaction)
         const playPromise = video.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay prevented – we can add a tiny invisible play button if needed
-            // but for now, just ignore
-          });
+          playPromise.catch(() => {});
         }
       }
-
-      // adjust floating elements on resize (optional)
-      function adjustFloating() {
-        // nothing needed, but keeps responsiveness
-      }
-      window.addEventListener('resize', adjustFloating);
     })();
   </script>
-
-  <style>
-    /* additional responsive tweaks */
-    @media (max-width: 350px) {
-      .poem-white { font-size: 1.1rem; }
-      .signature-line { font-size: 0.8rem; letter-spacing: 1px; }
-      .heart-sep { font-size: 1.2rem; letter-spacing: 4px; }
-    }
-    
-    @media (min-width: 2000px) {
-      .poem-white { font-size: 2.5rem; }
-    }
-  </style>
 </body>
 </html>
